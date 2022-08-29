@@ -1,7 +1,7 @@
 <template>
   <div class="second section">
     <div class="top">
-      <div class="title">Service we can help you</div>
+      <div class="title left">Service we can help you</div>
       <div class="right">
         <span>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
@@ -45,7 +45,54 @@
 </template>
 
 <script>
-export default {};
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onMounted } from "@vue/runtime-core";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default {
+  name: "SecondSection",
+  setup() {
+    var tlThree = gsap.timeline({ delay: 0.07, smoothChildTiming: true });
+    var tlFour = gsap.timeline({ delay: 0.07, smoothChildTiming: true });
+
+    onMounted(() => {
+      setTimeout(() => {
+        tlThree.from([".second.section .left"], {
+          x: -30, // any properties (not limited to CSS)
+          opacity: 0,
+          duration: 0.7, // seconds
+          ease: "power1.inOut",
+          yoyo: true,
+          // delay: 0.5,
+          stagger: 0.1,
+        });
+        tlFour.from([".second.section .right"], {
+          x: 30, // any properties (not limited to CSS)
+          opacity: 0,
+          duration: 0.7, // seconds
+          ease: "power1.inOut",
+          yoyo: true,
+          // delay: 0.5,
+          stagger: 0.1,
+        });
+
+        tlThree.add(tlFour, "-=0.5");
+
+        ScrollTrigger.create({
+          trigger: ".second",
+          start: "center bottom",
+          endTrigger: ".second",
+          animation: tlThree,
+          markers: false,
+          toggleActions: "play pause resume none",
+          // once: true,
+        });
+      }, 50);
+    });
+  },
+};
 </script>
 
 <style lang="scss" scoped >

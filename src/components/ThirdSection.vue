@@ -20,15 +20,66 @@
           </div>
         </div>
       </div>
-      <div class="right">
-        <img alt="Vue logo" src="../assets/image-2.webp" />
+      <div
+        class="right"
+        :style="{
+          backgroundImage: 'url(' + require('@/assets/image-2.webp') + ')',
+        }"
+      >
+        <!-- <img alt="Vue logo" src="../assets/image-2.webp" /> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onMounted } from "@vue/runtime-core";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default {
+  name: "ThirdSection",
+  setup() {
+    var tl = gsap.timeline({ delay: 0.07, smoothChildTiming: true });
+    var tlTwo = gsap.timeline({ delay: 0.07, smoothChildTiming: true });
+
+    onMounted(() => {
+      setTimeout(() => {
+        tl.from([".third.section .left div"], {
+          x: -20, // any properties (not limited to CSS)
+          opacity: 0,
+          duration: 0.7, // seconds
+          ease: "power1.inOut",
+          yoyo: true,
+          // delay: 0.5,
+          stagger: 0.2,
+        });
+        tlTwo.from([".third.section .right"], {
+          x: 20, // any properties (not limited to CSS)
+          opacity: 0,
+          duration: 0.7, // seconds
+          ease: "power1.inOut",
+          yoyo: true,
+          // delay: 0.5,
+        });
+
+        tl.add(tlTwo, "-=0.5");
+
+        ScrollTrigger.create({
+          trigger: ".third",
+          start: "center bottom",
+          endTrigger: ".third",
+          animation: tl,
+          // markers: true,
+          toggleActions: "play pause resume none",
+          // once: true,
+        });
+      }, 50);
+    });
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -97,6 +148,10 @@ export default {};
     height: 100%;
     width: 100%;
     flex: 3;
+
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     // @media only screen and (max-width: 600px) {
     //   flex: 1;

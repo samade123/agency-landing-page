@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <HeaderNav />
-
     <FirstSection />
     <SecondSection />
     <ThirdSection />
@@ -12,10 +11,10 @@
       <div class="last section">
         <div class="title-wrapper">
           <div class="title">Want to grow your Business?</div>
-          <div class="title">We should talk</div>
+          <div class="title">We should talk!</div>
         </div>
 
-        <div class="chat">
+        <div class="chat bordered">
           let's chat <i class="las la-external-link-alt"></i>
         </div>
       </div>
@@ -85,7 +84,7 @@ export default {
     }
   }
 
-  .chat {
+  .chat.bordered {
     border: solid white 1px;
     padding: 15px;
     border-radius: 23px;

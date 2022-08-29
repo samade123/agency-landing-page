@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" id="header-wrapper">
     <div class="left">Bolue</div>
     <div class="middle">
       <div class="nav-link" v-for="link in navLinks" :key="link.name">

@@ -55,7 +55,55 @@
 </template>
 
 <script>
-export default {};
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onMounted } from "@vue/runtime-core";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default {
+  name: "FifthSection",
+  setup() {
+    var tl = gsap.timeline({ delay: 0.07, smoothChildTiming: true });
+    var tlTwo = gsap.timeline({ delay: 0.07, smoothChildTiming: true });
+
+    onMounted(() => {
+      setTimeout(() => {
+        tl.from([".fifth.section .slider .content-piece"], {
+          x: 300, // any properties (not limited to CSS)
+          // opacity: 0,
+          duration: 1, // seconds
+          ease: "power1.inOut",
+          // yoyo: true,
+          // delay: 0.5,
+          stagger: 0.2,
+        });
+
+        // tlTwo.from([".fifth.section .slider .content-piece"], {
+        //   y: 50, // any properties (not limited to CSS)
+        //   opacity: 0,
+        //   duration: 1, // seconds
+        //   ease: "power1.inOut",
+        //   // yoyo: true,
+        //   // delay: 0.5,
+        //   stagger: 0.2,
+        // });
+
+        // tl.add(tlTwo, "-=0.1");
+
+        ScrollTrigger.create({
+          trigger: ".fifth",
+          start: "center bottom",
+          endTrigger: ".fifth",
+          animation: tl,
+          // markers: true,
+          toggleActions: "play pause resume none",
+          // once: true,
+        });
+      }, 50);
+    });
+  },
+};
 </script>
 
 <style lang="scss" scoped >
@@ -128,9 +176,8 @@ export default {};
       font-style: italic;
 
       color: #000a;
-
     }
-      margin-bottom: 50px;
+    margin-bottom: 50px;
   }
 }
 </style>
