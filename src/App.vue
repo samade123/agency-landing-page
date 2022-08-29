@@ -5,7 +5,19 @@
   </nav> -->
 
   <router-view />
+  <PWAModal />
 </template>
+
+<script>
+import PWAModal from "@/components/PWAModal.vue";
+
+export default {
+  name: "App",
+  components: {
+    PWAModal,
+  },
+};
+</script>
 
 <style lang="scss">
 @import "@/styles/theme.scss";
@@ -13,6 +25,8 @@
 
 body {
   margin: 0;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -25,6 +39,8 @@ body {
   color: var(--app-text-color);
 
   height: 100vh;
+  // overflow-x: hidden;
+  max-width: 100vw;
 }
 
 nav {
